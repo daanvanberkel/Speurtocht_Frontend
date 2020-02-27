@@ -1,0 +1,12 @@
+<nav class="mat-elevation-z6 st-main-menu">
+  <a mat-button routerLink="/">Speurtocht</a>
+  <a mat-button routerLink="/targets">Targets</a>
+  <a mat-button routerLink="/players">Spelers</a>
+  <div class="flex-spacer"></div>
+  <a mat-button routerLink="/login" *ngIf="!player">Inloggen</a>
+  <button mat-button [matMenuTriggerFor]="appMenu" *ngIf="player">{{ player.name }}<span *ngIf="player.isAdmin()"> (admin)</span></button>
+</nav>
+
+<mat-menu #appMenu="matMenu">
+  <a mat-menu-item routerLink="/logout">Uitloggen</a>
+</mat-menu>

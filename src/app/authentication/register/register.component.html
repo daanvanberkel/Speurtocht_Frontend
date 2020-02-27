@@ -1,0 +1,37 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSumbit()">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>Speurtocht-account aanmaken</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Naam</mat-label>
+        <input matInput placeholder="Naam" formControlName="name" autocomplete="name" />
+        <mat-error *ngIf="registerForm.get('name').hasError('required')">
+          Naam is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Gebruikersnaam</mat-label>
+        <input matInput placeholder="Gebruikersnaam" formControlName="username" autocomplete="username" />
+        <mat-error *ngIf="registerForm.get('username').hasError('required')">
+          Gebruikersnaam is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Wachtwoord</mat-label>
+        <input type="password" matInput placeholder="Wachtwoord" formControlName="password" autocomplete="current-password" />
+        <mat-error *ngIf="registerForm.get('password').hasError('required')">
+          Wachtwoord is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button color="primary">Account aanmaken</button>
+      <a routerLink="/login" mat-button>Terug naar inloggen</a>
+    </mat-card-actions>
+  </mat-card>
+</form>
+

@@ -1,0 +1,63 @@
+<mat-card *ngIf="target" class="target-card">
+  <mat-card-header>
+    <mat-card-title>{{ target.title }}</mat-card-title>
+    <mat-card-subtitle>Door {{ target.player.name }}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="target.getPhotoUrl()" [alt]="target.title" />
+  <mat-card-content>
+    <p>
+      {{ target.description }}
+    </p>
+
+    <p *ngIf="target.hint && showHint">
+      {{ target.hint }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-raised-button color="primary" [routerLink]="'/targets/' + this.target._id + '/attempts/add'">Poging uploaden</a>
+    <button mat-button (click)="toggleHint()" *ngIf="target.hint && showHint">Hint verbergen</button>
+    <button mat-button (click)="toggleHint()" *ngIf="target.hint && !showHint">Hint weergeven</button>
+    <button mat-button *ngIf="canEdit()">Target aanpassen</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="attempts" class="target-card">
+  <mat-card-header>
+    <mat-card-title>Ingezonden pogingen</mat-card-title>
+    <mat-card-subtitle>{{ attempts.totalDocs }} poging<span *ngIf="attempts.totalDocs > 1">en</span></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="attempts.totalDocs == 0">
+    <p>Er zijn nog geen ingezonden pogingen</p>
+  </mat-card-content>
+  <mat-card-content *ngIf="attempts.totalDocs > 0">
+    <table mat-table [dataSource]="attempts.docs" class="attempt-table">
+      <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef>Score</th>
+        <td mat-cell *matCellDef="let element">{{ element.score }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="player">
+        <th mat-header-cell *matHeaderCellDef>Speler</th>
+        <td mat-cell *matCellDef="let element">{{ element.player.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" class="table-actions">
+          <button mat-icon-button matTooltip="Bekijk foto" (click)="showAttemptDetails(element)">
+            <mat-icon>image</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="Verwijder poging" (click)="deleteAttempt(element)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="attempts.limit" [length]="attempts.totalDocs" (page)="loadAttempts($event)" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

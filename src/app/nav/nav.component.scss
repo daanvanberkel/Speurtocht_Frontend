@@ -1,0 +1,11 @@
+@import "../../themes/theme";
+
+.st-main-menu {
+  display: flex;
+  padding: 8px 16px;
+  background: mat-color($primary);
+
+  .flex-spacer {
+    flex-grow: 1;
+  }
+}

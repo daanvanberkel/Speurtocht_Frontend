@@ -1,0 +1,17 @@
+<form [formGroup]="attemptForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <h2 mat-card-title>Poging uploaden</h2>
+    </mat-card-header>
+    <img mat-card-image *ngIf="showableImage" [src]="showableImage" alt="Poging preview" />
+    <mat-card-content *ngIf="!photo">
+      <a mat-button [routerLink]="'/targets/' + target_id">Annuleren</a>
+      <input class="hide" id="photo-input" formControlName="photo" type="file" accept="image/jpeg,image/png" (change)="onPhotoChange($event)" />
+      <label for="photo-input" class="mat-raised-button mat-button-base mat-primary">Foto selecteren</label>
+    </mat-card-content>
+    <mat-card-content *ngIf="photo">
+      <a mat-button [routerLink]="'/targets/' + target_id">Annuleren</a>
+      <button type="submit" mat-raised-button color="primary">Poging uploaden</button>
+    </mat-card-content>
+  </mat-card>
+</form>

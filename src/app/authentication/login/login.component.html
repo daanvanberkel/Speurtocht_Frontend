@@ -1,0 +1,38 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSumbit()">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Inloggen met Speurtocht-account</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Gebruikersnaam</mat-label>
+        <input matInput placeholder="Gebruikersnaam" formControlName="username" autocomplete="username" />
+        <mat-error *ngIf="loginForm.get('username').hasError('required')">
+          Gebruikersnaam is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Wachtwoord</mat-label>
+        <input type="password" matInput placeholder="Wachtwoord" formControlName="password" autocomplete="current-password" />
+        <mat-error *ngIf="loginForm.get('password').hasError('required')">
+          Wachtwoord is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button color="primary">Inloggen</button>
+      <a routerLink="/register" mat-button>Account aanmaken</a>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title>Inloggen met socialmedia-account</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <a [href]="getFacebookLogin()" mat-button>Inloggen met Facebook</a><br/>
+    <a [href]="getGoogleLogin()" mat-button>Inloggen met Google</a>
+  </mat-card-content>
+</mat-card>
