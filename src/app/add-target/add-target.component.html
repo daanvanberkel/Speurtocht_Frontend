@@ -1,0 +1,68 @@
+<form [formGroup]="targetForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <h2 mat-card-title>Target toevoegen</h2>
+    </mat-card-header>
+    <img mat-card-image *ngIf="showablePhoto" [src]="showablePhoto" alt="Target foto preview" />
+    <mat-card-content *ngIf="!saving">
+      <table class="full-width">
+        <tr>
+          <td style="width: 75%;">
+            <mat-form-field class="full-width">
+              <mat-label>Titel</mat-label>
+              <input matInput placeholder="Titel" formControlName="title" (keyup)="onTitleChange($event)" />
+              <mat-error *ngIf="targetForm.get('title').hasError('required')">
+                Titel is <strong>verplicht</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Uniek ID</mat-label>
+              <input matInput placeholder="Uniek ID" formControlName="id" (keyup)="onIdChange($event)" />
+              <mat-error *ngIf="targetForm.get('id').hasError('required')">
+                Uniek ID is <strong>verplicht</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <mat-form-field class="full-width">
+        <mat-label>Omschrijving</mat-label>
+        <textarea matInput placeholder="Omschrijving" formControlName="description"></textarea>
+        <mat-error *ngIf="targetForm.get('description').hasError('required')">
+          Omschrijving is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Hint</mat-label>
+        <input matInput placeholder="Hint" formControlName="hint" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Latitude</mat-label>
+        <input matInput placeholder="Latitude" formControlName="lat" />
+        <mat-error *ngIf="targetForm.get('lat').hasError('required')">
+          Latitude is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Longitude</mat-label>
+        <input matInput placeholder="Longitude" formControlName="lng" />
+        <mat-error *ngIf="targetForm.get('lng').hasError('required')">
+          Longitude is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <input class="hide" id="photo-input" formControlName="photo" type="file" accept="image/jpeg,image/png" (change)="onPhotoChange($event)" />
+      <label for="photo-input" class="mat-raised-button mat-button-base mat-primary">Foto selecteren</label>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!saving">
+      <a mat-button routerLink="/targets">Annuleren</a>
+      <button mat-raised-button type="submit" color="primary">Opslaan</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

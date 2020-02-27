@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Target} from '../models/target';
 import {TargetService} from '../services/target.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Player} from '../models/player';
 import {Attempt} from '../models/attempt';
 import {AttemptService} from '../services/attempt.service';
@@ -12,6 +12,7 @@ import {AttemptDetailDialogComponent} from '../attempt-detail-dialog/attempt-det
 import {AttemptDeleteConfirmComponent} from '../attempt-delete-confirm/attempt-delete-confirm.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../authentication/auth.service';
+import {TargetDeleteConfirmComponent} from '../target-delete-confirm/target-delete-confirm.component';
 
 @Component({
   selector: 'app-target',
@@ -32,7 +33,8 @@ export class TargetComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -103,6 +105,25 @@ export class TargetComponent implements OnInit {
               duration: 5000
             });
           }
+        });
+      }
+    });
+  }
+
+  deleteTarget() {
+    let dialogRef = this.dialog.open(TargetDeleteConfirmComponent, {
+      data: {
+        target: this.target
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(t => {
+      if (t) {
+        this.targetService.deleteTarget(t._id).subscribe(() => {
+          this.router.navigate(['/targets']);
+          this.snackBar.open('Target is verwijderd', null, {
+            duration: 5000
+          });
         });
       }
     });

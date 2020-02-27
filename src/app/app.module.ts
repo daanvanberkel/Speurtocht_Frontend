@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,15 @@ import { AttemptDeleteConfirmComponent } from './attempt-delete-confirm/attempt-
 import {AuthenticationModule} from './authentication/authentication.module';
 import { AddAttemptComponent } from './add-attempt/add-attempt.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { AddTargetComponent } from './add-target/add-target.component';
+import { TargetsComponent } from './targets/targets.component';
+import localeNl from '@angular/common/locales/nl';
+import {registerLocaleData} from '@angular/common';
+import {MatSortModule} from '@angular/material/sort';
+import { EditTargetComponent } from './edit-target/edit-target.component';
+import { TargetDeleteConfirmComponent } from './target-delete-confirm/target-delete-confirm.component';
+
+registerLocaleData(localeNl);
 
 @NgModule({
   declarations: [
@@ -38,7 +47,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     TargetComponent,
     AttemptDetailDialogComponent,
     AttemptDeleteConfirmComponent,
-    AddAttemptComponent
+    AddAttemptComponent,
+    AddTargetComponent,
+    TargetsComponent,
+    EditTargetComponent,
+    TargetDeleteConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -62,8 +75,12 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatTooltipModule,
     MatDialogModule,
     AuthenticationModule.forRoot(),
-    MatBadgeModule
+    MatBadgeModule,
+    MatSortModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'nl'}
+  ]
 })
 export class AppModule { }

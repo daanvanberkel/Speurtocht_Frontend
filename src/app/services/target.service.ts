@@ -50,8 +50,8 @@ export class TargetService {
     return this.http.put<any>(`${environment.api_base}/targets/${id}`, {
       title: target.title,
       description: target.description,
-      lat: target.location.coordinates[1],
       lng: target.location.coordinates[0],
+      lat: target.location.coordinates[1],
       hint: target.hint
     })
       .pipe(

@@ -1,0 +1,49 @@
+<form [formGroup]="targetForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <h2 mat-card-title>Target aanpassen</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Titel</mat-label>
+        <input matInput placeholder="Titel" formControlName="title" />
+        <mat-error *ngIf="targetForm.get('title').hasError('required')">
+          Titel is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Omschrijving</mat-label>
+        <textarea matInput placeholder="Omschrijving" formControlName="description"></textarea>
+        <mat-error *ngIf="targetForm.get('description').hasError('required')">
+          Omschrijving is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Hint</mat-label>
+        <input matInput placeholder="Hint" formControlName="hint" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Latitude</mat-label>
+        <input matInput placeholder="Latitude" formControlName="lat" />
+        <mat-error *ngIf="targetForm.get('lat').hasError('required')">
+          Latitude is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Longitude</mat-label>
+        <input matInput placeholder="Longitude" formControlName="lng" />
+        <mat-error *ngIf="targetForm.get('lng').hasError('required')">
+          Longitude is <strong>verplicht</strong>
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions *ngIf="target">
+      <a mat-button [routerLink]="'/targets/' + target._id">Annuleren</a>
+      <button type="submit" mat-raised-button color="primary">Opslaan</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

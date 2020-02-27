@@ -23,6 +23,8 @@ export class Target {
   hint: string;
   tags: any[];
   thumbs: any[];
+  thumbs_up: number;
+  thumbs_down: number;
 
   getPhotoUrl(): string {
     return `${environment.api_base}/targets/${this._id}/photo`;

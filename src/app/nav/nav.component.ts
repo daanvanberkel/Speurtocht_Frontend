@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Player} from '../models/player';
 import {AuthService} from '../authentication/auth.service';
-import {PlayerService} from '../services/player.service';
 
 @Component({
   selector: 'app-nav',

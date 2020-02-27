@@ -17,7 +17,8 @@
     <a mat-raised-button color="primary" [routerLink]="'/targets/' + this.target._id + '/attempts/add'">Poging uploaden</a>
     <button mat-button (click)="toggleHint()" *ngIf="target.hint && showHint">Hint verbergen</button>
     <button mat-button (click)="toggleHint()" *ngIf="target.hint && !showHint">Hint weergeven</button>
-    <button mat-button *ngIf="canEdit()">Target aanpassen</button>
+    <a mat-button *ngIf="canEdit()" [routerLink]="'/targets/' + target._id + '/edit'">Target aanpassen</a>
+    <button mat-button *ngIf="canEdit()" (click)="deleteTarget()">Target verwijderen</button>
   </mat-card-actions>
 </mat-card>
 

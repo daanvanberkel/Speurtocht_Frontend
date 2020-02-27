@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-header>
+    <h2 mat-card-title>Targets</h2>
+  </mat-card-header>
+  <mat-card-actions>
+    <a routerLink="/targets/add" mat-raised-button color="primary">Target toevoegen</a>
+  </mat-card-actions>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Titel</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="player">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="player.name">Speler</th>
+        <td mat-cell *matCellDef="let element">{{ element.player.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="thumbs">
+        <th mat-header-cell *matHeaderCellDef>Thumbs</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon>thumb_up</mat-icon> {{ element.thumbs_up }}
+          <mat-icon>thumb_down</mat-icon> {{ element.thumbs_down }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="distance">
+        <th mat-header-cell *matHeaderCellDef>Afstand</th>
+        <td mat-cell *matCellDef="let element">{{ getDistance(element) / 1000 | number:'1.0-2' }} km</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" class="table-actions">
+          <a mat-button [routerLink]="'/targets/' + element._id">Bekijken</a>
+          <a mat-button *ngIf="player && (player._id == element.player._id || player.isAdmin())" [routerLink]="'/targets/' + element._id + '/edit'">Aanpassen</a>
+          <button mat-button *ngIf="player && (player._id == element.player._id || player.isAdmin())" (click)="deleteTarget(element)">Verwijderen</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator pageSize="20" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>
