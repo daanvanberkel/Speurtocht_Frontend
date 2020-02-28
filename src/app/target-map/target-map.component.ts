@@ -5,6 +5,8 @@ import {Target} from '../models/target';
 import LatLngLiteral = google.maps.LatLngLiteral;
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
+import {debounceTime} from 'rxjs/operators';
+import {fromEvent} from 'rxjs';
 
 @Component({
   selector: 'app-target-map',
@@ -18,6 +20,7 @@ export class TargetMapComponent implements OnInit, AfterViewInit, OnDestroy {
   map: google.maps.Map;
   watcher: number;
   userMarker: google.maps.Marker;
+  userMoved = false;
 
   targets: Target[];
   markers: google.maps.Marker[];
@@ -54,9 +57,12 @@ export class TargetMapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.lastPosition = latLng;
 
         this.userMarker.setPosition(latLng);
-        this.map.panTo(latLng);
-        this.map.setZoom(15);
-        this.loadTargets(latLng)
+
+        if (!this.userMoved) {
+          this.map.panTo(latLng);
+          this.map.setZoom(15);
+          this.loadTargets(latLng);
+        }
       }, err => {
         alert('Om deze app te kunnen gebruiken moet de app uw positie hebben');
       });
@@ -301,6 +307,24 @@ export class TargetMapComponent implements OnInit, AfterViewInit, OnDestroy {
           ]
         }
       ]
+    });
+
+    let lastCallAt = Date.now();
+    this.map.addListener('center_changed', args => {
+      if (lastCallAt && lastCallAt > Date.now() - 1500) {
+        return;
+      }
+
+      lastCallAt = Date.now();
+
+      this.loadTargets({
+        lat: this.map.getCenter().lat(),
+        lng: this.map.getCenter().lng()
+      });
+    });
+
+    this.map.addListener('drag', () => {
+      this.userMoved = true;
     });
   }
 }

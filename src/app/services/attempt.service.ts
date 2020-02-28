@@ -16,17 +16,13 @@ export class AttemptService {
   ) { }
 
   getAttempts(target_id: string, filter?: AttemptFilter): Observable<Paginated<Attempt>> {
-    let params = new URLSearchParams();
-    if (filter) {
-      if (filter.sort) params.append('sort', filter.sort);
-      if (filter.order) params.append('order', filter.order);
-      if (filter.limit) params.append('limit', filter.limit.toString());
-      if (filter.page) params.append('page', filter.page.toString());
-      if (filter.score) params.append('score', filter.score);
-      if (filter.date) params.append('date', filter.date);
-    }
+    let params = this.filterToParams(filter);
+    return this.http.get<Paginated<Attempt>>(`${environment.api_base}/targets/${target_id}/attempts${params}`);
+  }
 
-    return this.http.get<Paginated<Attempt>>(`${environment.api_base}/targets/${target_id}/attempts?${params.toString()}`);
+  getAttemptsByPlayer(username: string, filter?: AttemptFilter): Observable<Paginated<Attempt>> {
+    let params = this.filterToParams(filter);
+    return this.http.get<Paginated<Attempt>>(`${environment.api_base}/players/${username}/attempts${params}`);
   }
 
   getAttempt(target_id: string, id: string): Observable<Attempt> {
@@ -45,5 +41,25 @@ export class AttemptService {
 
   deleteAttempt(target_id: string, id: string): Observable<any> {
     return this.http.delete(`${environment.api_base}/targets/${target_id}/attempts/${id}`);
+  }
+
+  private filterToParams(filter?: AttemptFilter): string {
+    let params = new URLSearchParams();
+    if (filter) {
+      if (filter.sort) params.append('sort', filter.sort);
+      if (filter.order) params.append('order', filter.order);
+      if (filter.limit) params.append('limit', filter.limit.toString());
+      if (filter.page) params.append('page', filter.page.toString());
+      if (filter.score) params.append('score', filter.score);
+      if (filter.date) params.append('date', filter.date);
+    }
+
+    let parsed = params.toString();
+
+    if (parsed) {
+      parsed = '?' + parsed;
+    }
+
+    return parsed;
   }
 }

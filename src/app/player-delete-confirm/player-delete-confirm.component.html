@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Speler verwijderen</h2>
+<p>Weet u zeker dat u de speler {{ player.name }} wilt verwijderen?</p>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="null" tabindex="-1">Annuleren</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="player">Verwijderen</button>
+</mat-dialog-actions>

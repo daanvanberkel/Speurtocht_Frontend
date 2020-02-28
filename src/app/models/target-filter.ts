@@ -7,4 +7,5 @@ export class TargetFilter {
   lat?: number;
   lng?: number;
   radius?: number;
+  username?: string;
 }

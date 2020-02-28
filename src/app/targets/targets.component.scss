@@ -1,13 +1,10 @@
 mat-card {
-  max-width: 800px;
-  margin: 25px auto 0;
-
   table {
     width: calc(100% + 32px);
     margin-left: -16px;
   }
 
-  mat-icon {
+  .thumbs mat-icon {
     font-size: 1em;
     height: 1em;
     width: 1em;

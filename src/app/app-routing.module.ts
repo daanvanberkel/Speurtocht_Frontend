@@ -7,12 +7,29 @@ import {AuthGuard} from './authentication/auth.guard';
 import {AddTargetComponent} from './add-target/add-target.component';
 import {TargetsComponent} from './targets/targets.component';
 import {EditTargetComponent} from './edit-target/edit-target.component';
+import {ProfileComponent} from './profile/profile.component';
+import {EditPlayerComponent} from './edit-player/edit-player.component';
+import {PlayersComponent} from './players/players.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'map'
+  },
+  {
+    path: 'players',
+    component: PlayersComponent
+  },
+  {
+    path: 'players/:username',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'players/:username/edit',
+    component: EditPlayerComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'map',

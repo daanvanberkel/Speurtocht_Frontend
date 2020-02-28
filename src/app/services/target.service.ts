@@ -27,6 +27,7 @@ export class TargetService {
       if (filter.lat) params.append('lat', filter.lat.toString());
       if (filter.lng) params.append('lng', filter.lng.toString());
       if (filter.radius) params.append('radius', filter.radius.toString());
+      if (filter.username) params.append('username', filter.username);
     }
 
     return this.http.get<Paginated<Target>>(`${environment.api_base}/targets?${params.toString()}`);

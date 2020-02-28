@@ -5,4 +5,6 @@ export class AttemptFilter {
   order?: string;
   score?: string;
   date?: string;
+  target_id?: string;
+  username?: string;
 }

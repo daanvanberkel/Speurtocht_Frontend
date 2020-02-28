@@ -36,6 +36,11 @@ import {registerLocaleData} from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
 import { EditTargetComponent } from './edit-target/edit-target.component';
 import { TargetDeleteConfirmComponent } from './target-delete-confirm/target-delete-confirm.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AttemptsComponent } from './attempts/attempts.component';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
+import {PlayerDeleteConfirmComponent} from './player-delete-confirm/player-delete-confirm.component';
+import { PlayersComponent } from './players/players.component';
 
 registerLocaleData(localeNl);
 
@@ -51,7 +56,12 @@ registerLocaleData(localeNl);
     AddTargetComponent,
     TargetsComponent,
     EditTargetComponent,
-    TargetDeleteConfirmComponent
+    TargetDeleteConfirmComponent,
+    ProfileComponent,
+    AttemptsComponent,
+    EditPlayerComponent,
+    PlayerDeleteConfirmComponent,
+    PlayersComponent
   ],
   imports: [
     BrowserModule,

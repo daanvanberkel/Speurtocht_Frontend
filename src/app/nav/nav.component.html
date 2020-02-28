@@ -8,5 +8,7 @@
 </nav>
 
 <mat-menu #appMenu="matMenu">
+  <a mat-menu-item *ngIf="player" [routerLink]="'/players/' + player.username">Profiel</a>
+  <mat-divider></mat-divider>
   <a mat-menu-item routerLink="/logout">Uitloggen</a>
 </mat-menu>
