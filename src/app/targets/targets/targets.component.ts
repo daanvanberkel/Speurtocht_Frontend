@@ -40,11 +40,16 @@ export class TargetsComponent implements OnInit {
     this.dataSource.filter = {
       username: this.user ? this.user.username : ''
     };
+
+    if (this.user) {
+      this.displayedColumns.splice(this.displayedColumns.indexOf('player'), 1);
+    }
+
     this.authService.getPlayer().subscribe(player => this.player = player);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.displayedColumns.splice(3, 0, 'distance');
+        this.displayedColumns.splice(this.user ? 2 : 3, 0, 'distance');
         this.userPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       });
     }

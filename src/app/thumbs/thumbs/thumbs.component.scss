@@ -1,0 +1,19 @@
+@import "../../../themes/theme";
+
+mat-icon {
+  font-size: 1em;
+  height: 1em;
+  width: 1em;
+}
+
+span {
+  cursor: pointer;
+}
+
+.selected-up {
+  color: mat-color(mat-palette($mat-green));
+}
+
+.selected-down {
+  color: mat-color(mat-palette($mat-red));
+}

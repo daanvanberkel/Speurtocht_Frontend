@@ -36,6 +36,10 @@ export class AttemptsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.player) {
+      this.displayedColumns.splice(2, 0, 'target');
+    }
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 

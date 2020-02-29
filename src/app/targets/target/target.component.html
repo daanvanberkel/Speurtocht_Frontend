@@ -6,6 +6,10 @@
   <img mat-card-image [src]="target.getPhotoUrl()" [alt]="target.title" />
   <mat-card-content>
     <p>
+      <app-thumbs [target]="target"></app-thumbs>
+    </p>
+
+    <p>
       {{ target.description }}
     </p>
 

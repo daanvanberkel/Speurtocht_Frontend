@@ -24,6 +24,7 @@ export class Player {
   google?: GoogleCredentials;
   facebook?: FacebookCredentials;
   local?: LocalCredentials;
+  score?: number;
 
   isAdmin(): boolean {
     return this.roles.indexOf('admin') > -1;

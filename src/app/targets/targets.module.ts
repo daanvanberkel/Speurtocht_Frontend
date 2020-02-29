@@ -21,6 +21,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
 import {AttemptsModule} from "../attempts/attempts.module";
+import {ThumbsModule} from '../thumbs/thumbs.module';
 
 
 @NgModule({
@@ -32,22 +33,23 @@ import {AttemptsModule} from "../attempts/attempts.module";
     TargetMapComponent,
     TargetsComponent
   ],
-  imports: [
-    CommonModule,
-    TargetsRoutingModule,
-    HttpClientModule,
-    MatCardModule,
-    MatDialogModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSortModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatIconModule,
-    AttemptsModule,
-  ],
+    imports: [
+        CommonModule,
+        TargetsRoutingModule,
+        HttpClientModule,
+        MatCardModule,
+        MatDialogModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSortModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatPaginatorModule,
+        MatIconModule,
+        AttemptsModule,
+        ThumbsModule,
+    ],
   exports: [
     AddTargetComponent,
     EditTargetComponent,

@@ -17,7 +17,7 @@ export class PlayersComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  displayedColumns = ['name', 'actions'];
+  displayedColumns = ['name', 'score', 'actions'];
   dataSource = new PlayersDataSource(this.playerService);
 
   user: Player;
