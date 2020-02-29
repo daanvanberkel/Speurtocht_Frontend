@@ -1,5 +1,5 @@
-import {Target} from './target';
-import {Player} from './player';
+import {Target} from "../targets/target";
+import {Player} from "../authentication/player";
 
 export class Attempt {
   _id: string;

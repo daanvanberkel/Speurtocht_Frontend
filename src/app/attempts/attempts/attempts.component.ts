@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Target} from '../models/target';
-import {Player} from '../models/player';
-import {AttemptsDataSource} from '../datasources/attempts.datasource';
-import {AttemptService} from '../services/attempt.service';
-import {Attempt} from '../models/attempt';
+import {Target} from '../../targets/target';
+import {Player} from '../../authentication/player';
+import {AttemptsDataSource} from '../attempts.datasource';
+import {AttemptService} from '../attempt.service';
+import {Attempt} from '../attempt';
 import {AttemptDetailDialogComponent} from '../attempt-detail-dialog/attempt-detail-dialog.component';
 import {AttemptDeleteConfirmComponent} from '../attempt-delete-confirm/attempt-delete-confirm.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -14,7 +14,11 @@ import {MatSort} from '@angular/material/sort';
 @Component({
   selector: 'app-attempts',
   templateUrl: './attempts.component.html',
-  styleUrls: ['./attempts.component.scss']
+  styleUrls: ['./attempts.component.scss'],
+  inputs: [
+    'target',
+    'player'
+  ]
 })
 export class AttemptsComponent implements OnInit {
 

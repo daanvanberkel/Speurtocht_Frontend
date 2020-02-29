@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {TargetFilter} from '../models/target-filter';
+import {TargetFilter} from './target-filter';
 import {Observable} from 'rxjs';
-import {Target} from '../models/target';
+import {Target} from './target';
 import {environment} from '../../environments/environment';
-import {Paginated} from '../models/paginated';
+import {Paginated} from './paginated';
 import {map} from 'rxjs/operators';
 
 @Injectable({

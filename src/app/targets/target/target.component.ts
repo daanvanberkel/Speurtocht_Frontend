@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Target} from '../models/target';
-import {TargetService} from '../services/target.service';
+import {Target} from '../target';
+import {TargetService} from '../target.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Player} from '../models/player';
-import {AttemptService} from '../services/attempt.service';
+import {Player} from '../../authentication/player';
+import {AttemptService} from '../../attempts/attempt.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AuthService} from '../authentication/auth.service';
+import {AuthService} from '../../authentication/auth.service';
 import {TargetDeleteConfirmComponent} from '../target-delete-confirm/target-delete-confirm.component';
 
 @Component({

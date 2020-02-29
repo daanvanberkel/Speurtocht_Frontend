@@ -3,9 +3,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {Injectable} from '@angular/core';
-import {Attempt} from '../models/attempt';
-import {AttemptService} from '../services/attempt.service';
-import {AttemptFilter} from '../models/attempt-filter';
+import {Attempt} from './attempt';
+import {AttemptService} from './attempt.service';
+import {AttemptFilter} from './attempt-filter';
 
 @Injectable()
 export class AttemptsDataSource extends DataSource<Attempt> {

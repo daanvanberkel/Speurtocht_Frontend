@@ -1,12 +1,10 @@
 /// <reference types="@types/googlemaps" />
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {TargetService} from '../services/target.service';
-import {Target} from '../models/target';
+import {TargetService} from '../target.service';
+import {Target} from '../target';
 import LatLngLiteral = google.maps.LatLngLiteral;
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
-import {debounceTime} from 'rxjs/operators';
-import {fromEvent} from 'rxjs';
 
 @Component({
   selector: 'app-target-map',

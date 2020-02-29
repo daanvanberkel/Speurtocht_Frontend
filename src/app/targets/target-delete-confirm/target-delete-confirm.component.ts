@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Target} from '../models/target';
+import {Target} from '../target';
 
 @Component({
   selector: 'app-target-delete-confirm',

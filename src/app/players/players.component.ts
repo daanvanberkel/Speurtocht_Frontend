@@ -3,7 +3,7 @@ import {PlayerService} from '../services/player.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {PlayersDataSource} from '../datasources/players.datasource';
-import {Player} from '../models/player';
+import {Player} from '../authentication/player';
 import {Observable} from 'rxjs';
 import {AuthService} from '../authentication/auth.service';
 

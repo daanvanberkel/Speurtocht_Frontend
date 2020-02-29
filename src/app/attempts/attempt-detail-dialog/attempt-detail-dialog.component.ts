@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Attempt} from '../models/attempt';
-import {environment} from '../../environments/environment';
+import {Attempt} from '../attempt';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-attempt-detail-dialog',

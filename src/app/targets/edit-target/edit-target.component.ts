@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TargetService} from '../services/target.service';
-import {Target} from '../models/target';
+import {TargetService} from '../target.service';
+import {Target} from '../target';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

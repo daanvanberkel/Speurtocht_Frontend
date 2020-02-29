@@ -1,11 +1,11 @@
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {Target} from '../models/target';
+import {Target} from './target';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {TargetService} from '../services/target.service';
+import {TargetService} from './target.service';
 import {Injectable} from '@angular/core';
-import {TargetFilter} from '../models/target-filter';
+import {TargetFilter} from './target-filter';
 
 @Injectable()
 export class TargetsDataSource extends DataSource<Target> {

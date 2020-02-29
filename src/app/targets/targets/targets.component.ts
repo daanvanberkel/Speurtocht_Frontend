@@ -1,15 +1,15 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Target} from '../models/target';
-import {TargetService} from '../services/target.service';
+import {Target} from '../target';
+import {TargetService} from '../target.service';
 import {MatPaginator} from '@angular/material/paginator';
 import LatLng = google.maps.LatLng;
 import {MatSort} from '@angular/material/sort';
-import {Player} from '../models/player';
-import {AuthService} from '../authentication/auth.service';
+import {Player} from '../../authentication/player';
+import {AuthService} from '../../authentication/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TargetDeleteConfirmComponent} from '../target-delete-confirm/target-delete-confirm.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {TargetsDataSource} from '../datasources/targets.datasource';
+import {TargetsDataSource} from '../targets.datasource';
 
 @Component({
   selector: 'app-targets',

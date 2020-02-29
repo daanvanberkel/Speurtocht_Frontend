@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Paginated} from '../models/paginated';
+import {Paginated} from './paginated';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {AttemptFilter} from '../models/attempt-filter';
-import {Attempt} from '../models/attempt';
+import {AttemptFilter} from './attempt-filter';
+import {Attempt} from './attempt';
 
 @Injectable({
   providedIn: 'root'

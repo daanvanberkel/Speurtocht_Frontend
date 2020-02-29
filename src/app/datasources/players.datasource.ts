@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {Injectable} from '@angular/core';
-import {Player} from '../models/player';
+import {Player} from '../authentication/player';
 import {PlayerService} from '../services/player.service';
 
 @Injectable()

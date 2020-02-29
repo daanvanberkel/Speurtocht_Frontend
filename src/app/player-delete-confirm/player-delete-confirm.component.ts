@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Player} from '../models/player';
+import {Player} from '../authentication/player';
 
 @Component({
   selector: 'app-player-delete-confirm',

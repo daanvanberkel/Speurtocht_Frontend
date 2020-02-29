@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Player} from '../models/player';
+import {Player} from '../authentication/player';
 import {PlayerFilter} from '../models/player-filter';
-import {Paginated} from '../models/paginated';
+import {Paginated} from '../targets/paginated'; // TODO: CHange to player module
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 

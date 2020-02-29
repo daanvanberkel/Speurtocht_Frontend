@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {PlayerService} from '../../services/player.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Player} from '../../models/player';
+import {Player} from '../player';
 
 @Component({
   selector: 'app-register',

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Attempt} from '../models/attempt';
+import {Attempt} from '../attempt';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({

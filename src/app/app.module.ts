@@ -12,9 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-import { TargetMapComponent } from './target-map/target-map.component';
 import {HttpClientModule} from '@angular/common/http';
-import { TargetComponent } from './target/target.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -23,24 +21,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { AttemptDetailDialogComponent } from './attempt-detail-dialog/attempt-detail-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AttemptDeleteConfirmComponent } from './attempt-delete-confirm/attempt-delete-confirm.component';
 import {AuthenticationModule} from './authentication/authentication.module';
-import { AddAttemptComponent } from './add-attempt/add-attempt.component';
 import {MatBadgeModule} from '@angular/material/badge';
-import { AddTargetComponent } from './add-target/add-target.component';
-import { TargetsComponent } from './targets/targets.component';
 import localeNl from '@angular/common/locales/nl';
 import {registerLocaleData} from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
-import { EditTargetComponent } from './edit-target/edit-target.component';
-import { TargetDeleteConfirmComponent } from './target-delete-confirm/target-delete-confirm.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AttemptsComponent } from './attempts/attempts.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
 import {PlayerDeleteConfirmComponent} from './player-delete-confirm/player-delete-confirm.component';
 import { PlayersComponent } from './players/players.component';
+import {TargetsModule} from "./targets/targets.module";
+import {AttemptsModule} from "./attempts/attempts.module";
 
 registerLocaleData(localeNl);
 
@@ -48,17 +40,7 @@ registerLocaleData(localeNl);
   declarations: [
     AppComponent,
     NavComponent,
-    TargetMapComponent,
-    TargetComponent,
-    AttemptDetailDialogComponent,
-    AttemptDeleteConfirmComponent,
-    AddAttemptComponent,
-    AddTargetComponent,
-    TargetsComponent,
-    EditTargetComponent,
-    TargetDeleteConfirmComponent,
     ProfileComponent,
-    AttemptsComponent,
     EditPlayerComponent,
     PlayerDeleteConfirmComponent,
     PlayersComponent
@@ -69,6 +51,8 @@ registerLocaleData(localeNl);
     BrowserAnimationsModule,
     LayoutModule,
     ReactiveFormsModule,
+
+    // Material design
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -84,9 +68,13 @@ registerLocaleData(localeNl);
     MatPaginatorModule,
     MatTooltipModule,
     MatDialogModule,
-    AuthenticationModule.forRoot(),
     MatBadgeModule,
-    MatSortModule
+    MatSortModule,
+
+    // Custom modules
+    AuthenticationModule.forRoot(),
+    TargetsModule.forRoot(),
+    AttemptsModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [
