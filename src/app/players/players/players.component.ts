@@ -1,11 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
-import {PlayerService} from '../services/player.service';
+import {PlayerService} from '../player.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {PlayersDataSource} from '../datasources/players.datasource';
-import {Player} from '../authentication/player';
-import {Observable} from 'rxjs';
-import {AuthService} from '../authentication/auth.service';
+import {PlayersDataSource} from '../players.datasource';
+import {Player} from '../../authentication/player';
+import {AuthService} from '../../authentication/auth.service';
 
 @Component({
   selector: 'app-players',
@@ -32,9 +31,5 @@ export class PlayersComponent implements OnInit {
     this.authService.getPlayer().subscribe(user => this.user = user);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  getScore(player: Player): Observable<number> {
-    return this.playerService.playerScore(player.username);
   }
 }

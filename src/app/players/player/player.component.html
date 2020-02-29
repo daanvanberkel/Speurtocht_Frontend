@@ -1,4 +1,4 @@
-<mat-card *ngIf="player">
+<mat-card>
   <mat-card-header>
     <mat-icon mat-card-avatar>account_box</mat-icon>
     <h2 mat-card-title>{{ player.name }}</h2>
@@ -16,6 +16,6 @@
   </mat-card-actions>
 </mat-card>
 
-<app-attempts *ngIf="player && canEdit()" [player]="player"></app-attempts>
+<app-attempts *ngIf="canEdit()" [player]="player"></app-attempts>
 
-<app-targets *ngIf="player" [user]="player"></app-targets>
+<app-targets [user]="player"></app-targets>

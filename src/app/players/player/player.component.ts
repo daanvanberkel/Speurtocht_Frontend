@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {Player} from '../authentication/player';
-import {AuthService} from '../authentication/auth.service';
-import {PlayerService} from '../services/player.service';
+import {Player} from '../../authentication/player';
+import {AuthService} from '../../authentication/auth.service';
+import {PlayerService} from '../player.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {PlayerDeleteConfirmComponent} from '../player-delete-confirm/player-delete-confirm.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-player',
+  templateUrl: './player.component.html',
+  styleUrls: ['./player.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class PlayerComponent implements OnInit {
 
   user: Player;
   player: Player;
@@ -29,26 +29,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getPlayer().subscribe(user => {
-      this.user = user;
-      this.loadPlayer();
+    this.route.data.subscribe(data => {
+      this.player = data.player;
+      this.user = data.user;
+      this.score = data.score;
     });
-
-    this.route.paramMap.subscribe(params => {
-      if (params.get('username')) {
-        this.username = params.get('username');
-        this.loadPlayer();
-      }
-    });
-  }
-
-  loadPlayer() {
-    if (!this.user || !this.username) {
-      return;
-    }
-
-    this.playerService.getPlayer(this.username).subscribe(player => this.player = player);
-    this.playerService.playerScore(this.username).subscribe(score => this.score = score);
   }
 
   canEdit() {

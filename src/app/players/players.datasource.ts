@@ -4,7 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {Injectable} from '@angular/core';
 import {Player} from '../authentication/player';
-import {PlayerService} from '../services/player.service';
+import {PlayerService} from './player.service';
 
 @Injectable()
 export class PlayersDataSource extends DataSource<Player> {

@@ -35,10 +35,8 @@ export class TargetComponent implements OnInit {
       this.player = player;
     });
 
-    this.route.paramMap.subscribe(params => {
-      if (params.get('id')) {
-        this.targetService.getTarget(params.get('id')).subscribe(target => this.target = target);
-      }
+    this.route.data.subscribe(data => {
+      this.target = data.target;
     });
   }
 

@@ -10,7 +10,7 @@ import {map, tap} from 'rxjs/operators';
 })
 export class AuthService {
 
-  private player = new BehaviorSubject<Player>(null);
+  player = new BehaviorSubject<Player>(null);
 
   constructor(
     private http: HttpClient

@@ -31,19 +31,15 @@ export class EditTargetComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      if (params.get('id')) {
-        this.targetService.getTarget(params.get('id')).subscribe(target => {
-          this.target = target;
-          this.targetForm.patchValue({
-            title: target.title,
-            description: target.description,
-            lng: target.location.coordinates[0],
-            lat: target.location.coordinates[1],
-            hint: target.hint
-          });
-        });
-      }
+    this.route.data.subscribe(data => {
+      this.target = data.target;
+      this.targetForm.patchValue({
+        title: data.target.title,
+        description: data.target.description,
+        lng: data.target.location.coordinates[0],
+        lat: data.target.location.coordinates[1],
+        hint: data.target.hint
+      });
     });
   }
 

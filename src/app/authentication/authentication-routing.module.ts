@@ -5,13 +5,33 @@ import {RegisterComponent} from './register/register.component';
 import {LogoutComponent} from './logout/logout.component';
 import {CallbackComponent} from './callback/callback.component';
 
-
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login'},
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'callback', component: CallbackComponent },
+  {
+    path: '',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login'
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent
+      },
+      {
+        path: 'callback',
+        component: CallbackComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
