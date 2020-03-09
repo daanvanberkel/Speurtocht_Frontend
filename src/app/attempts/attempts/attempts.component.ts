@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Target} from '../../targets/target';
 import {Player} from '../../authentication/player';
 import {AttemptsDataSource} from '../attempts.datasource';
@@ -20,7 +20,7 @@ import {MatSort} from '@angular/material/sort';
     'player'
   ]
 })
-export class AttemptsComponent implements OnInit {
+export class AttemptsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -47,6 +47,36 @@ export class AttemptsComponent implements OnInit {
       username: this.player ? this.player.username : undefined,
       target_id: this.target ? this.target._id : undefined
     };
+
+    if (this.target) {
+      this.attemptService.subscribeAttempts(this.target._id);
+
+      this.attemptService.getNewAttemptsObservable().subscribe(attempt => {
+        if (attempt.target._id != this.target._id) {
+          return;
+        }
+
+        this.snackBar.open(`Er is een nieuwe poging van ${attempt.player.name} toegevoegd met score ${attempt.score}.`, 'Refresh', {
+          duration: 5000
+        }).onAction().subscribe(() => {
+          this.dataSource.reset();
+        });
+      });
+
+      this.attemptService.getDeletedAttemptsObservable().subscribe(attempt_id => {
+        this.snackBar.open('Er is een poging verwijderd', 'Refresh', {
+          duration: 5000
+        }).onAction().subscribe(() => {
+          this.dataSource.reset();
+        });
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.target) {
+      this.attemptService.unsubscribeAttempts(this.target._id);
+    }
   }
 
   showAttemptDetails(attempt: Attempt) {
@@ -66,7 +96,7 @@ export class AttemptsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(attempt => {
       if (attempt) {
-        this.attemptService.deleteAttempt(this.target._id, attempt._id).subscribe(() => {
+        this.attemptService.deleteAttempt(attempt.target._id, attempt._id).subscribe(() => {
           this.snackBar.open('Poging is verwijderd', null, {
             duration: 5000
           });

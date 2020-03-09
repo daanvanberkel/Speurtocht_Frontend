@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Target} from '../target';
 import {TargetService} from '../target.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -14,7 +14,7 @@ import {TargetDeleteConfirmComponent} from '../target-delete-confirm/target-dele
   templateUrl: './target.component.html',
   styleUrls: ['./target.component.scss']
 })
-export class TargetComponent implements OnInit {
+export class TargetComponent implements OnInit, OnDestroy {
 
   target: Target;
   player: Player;
@@ -37,7 +37,26 @@ export class TargetComponent implements OnInit {
 
     this.route.data.subscribe(data => {
       this.target = data.target;
+
+      this.targetService.subscribeTarget(this.target._id);
     });
+
+    this.targetService.getChangeTargetsObservable().subscribe(target => {
+      this.target = new Target(target);
+    });
+
+    this.targetService.getDeleteTargetsObservable().subscribe(target_id => {
+      if (target_id === this.target._id) {
+        this.router.navigate(['/targets']);
+        this.snackBar.open(`Target ${this.target.title} is verwijderd!`, null, {
+          duration: 5000
+        });
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.targetService.unsubscribeTarget(this.target._id);
   }
 
   canEdit(): boolean {

@@ -6,6 +6,7 @@ import {Target} from './target';
 import {environment} from '../../environments/environment';
 import {Paginated} from './paginated';
 import {map} from 'rxjs/operators';
+import {SocketService} from '../services/socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import {map} from 'rxjs/operators';
 export class TargetService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private socketService: SocketService
   ) { }
 
   getTargets(filter?: TargetFilter): Observable<Paginated<Target>> {
@@ -62,5 +64,49 @@ export class TargetService {
 
   deleteTarget(id: string): Observable<any> {
     return this.http.delete(`${environment.api_base}/targets/${id}`);
+  }
+
+  subscribeTargets() {
+    this.socketService.getSocket().emit('rooms:subscribe:targets');
+  }
+
+  subscribeTarget(target_id: string) {
+    this.socketService.getSocket().emit('rooms:subscribe:target', {
+      target_id
+    });
+  }
+
+  unsubscribeTargets() {
+    this.socketService.getSocket().emit('rooms:unsubscribe:targets');
+  }
+
+  unsubscribeTarget(target_id: string) {
+    this.socketService.getSocket().emit('rooms:unsubscribe:target', {
+      target_id
+    });
+  }
+
+  getNewTargetsObservable(): Observable<Target> {
+    return new Observable<Target>(subscriber => {
+      this.socketService.getSocket().on('targets:new', target => {
+        subscriber.next(target);
+      })
+    });
+  }
+
+  getChangeTargetsObservable(): Observable<Target> {
+    return new Observable<Target>(subscriber => {
+      this.socketService.getSocket().on('targets:change', target => {
+        subscriber.next(target);
+      })
+    });
+  }
+
+  getDeleteTargetsObservable(): Observable<string> {
+    return new Observable<string>(subscriber => {
+      this.socketService.getSocket().on('targets:delete', target => {
+        subscriber.next(target);
+      })
+    });
   }
 }

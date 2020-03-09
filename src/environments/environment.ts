@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_base: 'https://speurtocht.herokuapp.com'
+  api_base: 'http://localhost:3000'
 };
 
 /*

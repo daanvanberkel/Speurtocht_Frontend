@@ -6,13 +6,15 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {AttemptFilter} from './attempt-filter';
 import {Attempt} from './attempt';
+import {SocketService} from '../services/socket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AttemptService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private socketService: SocketService
   ) { }
 
   getAttempts(target_id: string, filter?: AttemptFilter): Observable<Paginated<Attempt>> {
@@ -41,6 +43,34 @@ export class AttemptService {
 
   deleteAttempt(target_id: string, id: string): Observable<any> {
     return this.http.delete(`${environment.api_base}/targets/${target_id}/attempts/${id}`);
+  }
+
+  getNewAttemptsObservable(): Observable<Attempt> {
+    return new Observable<Attempt>(subscriber => {
+      this.socketService.getSocket().on('attempts:new', data => {
+        subscriber.next(data);
+      });
+    });
+  }
+
+  getDeletedAttemptsObservable(): Observable<string> {
+    return new Observable<string>(subscriber => {
+      this.socketService.getSocket().on('attempts:delete', data => {
+        subscriber.next(data);
+      });
+    });
+  }
+
+  subscribeAttempts(target_id: string) {
+    this.socketService.getSocket().emit('rooms:subscribe:attempts', {
+      target_id
+    });
+  }
+
+  unsubscribeAttempts(target_id: string) {
+    this.socketService.getSocket().emit('rooms:unsubscribe:attempts', {
+      target_id
+    });
   }
 
   private filterToParams(filter?: AttemptFilter): string {
